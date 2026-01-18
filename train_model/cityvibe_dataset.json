@@ -1,0 +1,1584 @@
+[
+    {
+        "scenario_id": 31,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 2,
+                    "walk_time": 8.0
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 11.2
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 18.3
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 32,
+        "input": {
+            "ndvi": 0.26,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 8.7
+                },
+                {
+                    "class": 4,
+                    "walk_time": 8.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.6
+                },
+                {
+                    "class": 0,
+                    "walk_time": 12.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.1
+                },
+                {
+                    "class": 3,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 17.0
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 33,
+        "input": {
+            "ndvi": 0.14,
+            "objects": [
+                {
+                    "class": 2,
+                    "walk_time": 2.0
+                },
+                {
+                    "class": 0,
+                    "walk_time": 3.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 6.8
+                },
+                {
+                    "class": 1,
+                    "walk_time": 17.4
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 34,
+        "input": {
+            "ndvi": 0.1,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 4.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 5.6
+                },
+                {
+                    "class": 0,
+                    "walk_time": 10.1
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.3
+                },
+                {
+                    "class": 1,
+                    "walk_time": 15.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 16.1
+                },
+                {
+                    "class": 3,
+                    "walk_time": 23.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 24.9
+                }
+            ]
+        },
+        "target": 0.9
+    },
+    {
+        "scenario_id": 35,
+        "input": {
+            "ndvi": 0.42,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 2.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 4.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 1,
+                    "walk_time": 13.0
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 36,
+        "input": {
+            "ndvi": 0.63,
+            "objects": [
+                {
+                    "class": 2,
+                    "walk_time": 2.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 2.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 9.5
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 3,
+                    "walk_time": 15.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 20.2
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 37,
+        "input": {
+            "ndvi": 0.56,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 4.5
+                },
+                {
+                    "class": 0,
+                    "walk_time": 6.6
+                },
+                {
+                    "class": 4,
+                    "walk_time": 8.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.8
+                },
+                {
+                    "class": 1,
+                    "walk_time": 19.8
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 38,
+        "input": {
+            "ndvi": 0.24,
+            "objects": [
+                {
+                    "class": 3,
+                    "walk_time": 7.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.8
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 39,
+        "input": {
+            "ndvi": 0.27,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 2.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 8.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 11.0
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.8
+                },
+                {
+                    "class": 3,
+                    "walk_time": 19.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 21.5
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 40,
+        "input": {
+            "ndvi": 0.53,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 2.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 2.3
+                },
+                {
+                    "class": 1,
+                    "walk_time": 8.3
+                },
+                {
+                    "class": 1,
+                    "walk_time": 15.0
+                },
+                {
+                    "class": 3,
+                    "walk_time": 15.6
+                },
+                {
+                    "class": 3,
+                    "walk_time": 20.0
+                }
+            ]
+        },
+        "target": 1.0
+    },
+    {
+        "scenario_id": 21,
+        "input": {
+            "ndvi": 0.18,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 3,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 4,
+                    "walk_time": 11.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 12.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.9
+                },
+                {
+                    "class": 0,
+                    "walk_time": 19.0
+                }
+            ]
+        },
+        "target": 0.6
+    },
+    {
+        "scenario_id": 22,
+        "input": {
+            "ndvi": 0.38,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 3.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 6.2
+                },
+                {
+                    "class": 4,
+                    "walk_time": 6.5
+                },
+                {
+                    "class": 4,
+                    "walk_time": 8.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 12.0
+                }
+            ]
+        },
+        "target": 0.87
+    },
+    {
+        "scenario_id": 23,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 3.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 8.8
+                },
+                {
+                    "class": 3,
+                    "walk_time": 11.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 14.1
+                },
+                {
+                    "class": 1,
+                    "walk_time": 16.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 18.2
+                }
+            ]
+        },
+        "target": 0.5
+    },
+    {
+        "scenario_id": 24,
+        "input": {
+            "ndvi": 0.21,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 5.0
+                },
+                {
+                    "class": 4,
+                    "walk_time": 6.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 7.6
+                },
+                {
+                    "class": 0,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 11.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 22.2
+                }
+            ]
+        },
+        "target": 0.75
+    },
+    {
+        "scenario_id": 25,
+        "input": {
+            "ndvi": 0.5,
+            "objects": [
+                {
+                    "class": 3,
+                    "walk_time": 3.0
+                },
+                {
+                    "class": 4,
+                    "walk_time": 4.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 6.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 10.5
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.6
+                }
+            ]
+        },
+        "target": 0.88
+    },
+    {
+        "scenario_id": 26,
+        "input": {
+            "ndvi": 0.2,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 4.0
+                },
+                {
+                    "class": 2,
+                    "walk_time": 7.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 13.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 17.4
+                }
+            ]
+        },
+        "target": 0.6
+    },
+    {
+        "scenario_id": 27,
+        "input": {
+            "ndvi": 0.36,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 7.4
+                },
+                {
+                    "class": 1,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 16.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 18.6
+                }
+            ]
+        },
+        "target": 0.6
+    },
+    {
+        "scenario_id": 28,
+        "input": {
+            "ndvi": 0.36,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 5.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.5
+                }
+            ]
+        },
+        "target": 0.5
+    },
+    {
+        "scenario_id": 29,
+        "input": {
+            "ndvi": 0.31,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 2.9
+                },
+                {
+                    "class": 4,
+                    "walk_time": 5.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 6.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 7.6
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.3
+                }
+            ]
+        },
+        "target": 0.9
+    },
+    {
+        "scenario_id": 30,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 4.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 5.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 7.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 11.8
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 18.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 20.7
+                }
+            ]
+        },
+        "target": 0.95
+    },
+    {
+        "scenario_id": 71,
+        "input": {
+            "ndvi": 0.37,
+            "objects": [
+                {
+                    "class": 3,
+                    "walk_time": 2.7
+                },
+                {
+                    "class": 0,
+                    "walk_time": 5.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 6.2
+                },
+                {
+                    "class": 2,
+                    "walk_time": 10.1
+                },
+                {
+                    "class": 1,
+                    "walk_time": 17.5
+                },
+                {
+                    "class": 1,
+                    "walk_time": 19.4
+                }
+            ]
+        },
+        "target": 0.9
+    },
+    {
+        "scenario_id": 72,
+        "input": {
+            "ndvi": 0.3,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 9.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.8
+                },
+                {
+                    "class": 2,
+                    "walk_time": 13.8
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 17.3
+                }
+            ]
+        },
+        "target": 0.25
+    },
+    {
+        "scenario_id": 73,
+        "input": {
+            "ndvi": 0.3,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 6.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 8.6
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 17.0
+                }
+            ]
+        },
+        "target": 0.4
+    },
+    {
+        "scenario_id": 74,
+        "input": {
+            "ndvi": 0.45,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 7.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 9.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 13.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 17.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 20.2
+                }
+            ]
+        },
+        "target": 0.35
+    },
+    {
+        "scenario_id": 75,
+        "input": {
+            "ndvi": 0.16,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 2.5
+                },
+                {
+                    "class": 0,
+                    "walk_time": 3.4
+                },
+                {
+                    "class": 4,
+                    "walk_time": 4.9
+                },
+                {
+                    "class": 0,
+                    "walk_time": 6.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 6.6
+                }
+            ]
+        },
+        "target": 0.75
+    },
+    {
+        "scenario_id": 76,
+        "input": {
+            "ndvi": 0.18,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 6.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 7.8
+                },
+                {
+                    "class": 2,
+                    "walk_time": 7.9
+                },
+                {
+                    "class": 0,
+                    "walk_time": 8.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 14.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.8
+                }
+            ]
+        },
+        "target": 0.4
+    },
+    {
+        "scenario_id": 77,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 6.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 7.5
+                },
+                {
+                    "class": 0,
+                    "walk_time": 7.8
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.1
+                },
+                {
+                    "class": 1,
+                    "walk_time": 8.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 10.0
+                },
+                {
+                    "class": 0,
+                    "walk_time": 12.9
+                }
+            ]
+        },
+        "target": 0.35
+    },
+    {
+        "scenario_id": 78,
+        "input": {
+            "ndvi": 0.34,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 4.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 16.0
+                },
+                {
+                    "class": 3,
+                    "walk_time": 23.3
+                }
+            ]
+        },
+        "target": 0.4
+    },
+    {
+        "scenario_id": 79,
+        "input": {
+            "ndvi": 0.51,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 3.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 6.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 11.0
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 13.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.7
+                },
+                {
+                    "class": 0,
+                    "walk_time": 15.6
+                }
+            ]
+        },
+        "target": 0.9
+    },
+    {
+        "scenario_id": 80,
+        "input": {
+            "ndvi": 0.25,
+            "objects": [
+                {
+                    "class": 2,
+                    "walk_time": 4.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 4.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 8.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 10.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 11.4
+                }
+            ]
+        },
+        "target": 0.75
+    },
+    {
+        "scenario_id": 81,
+        "input": {
+            "ndvi": 0.47,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 3.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 4.6
+                },
+                {
+                    "class": 1,
+                    "walk_time": 7.8
+                },
+                {
+                    "class": 3,
+                    "walk_time": 13.6
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 19.2
+                }
+            ]
+        },
+        "target": 0.86
+    },
+    {
+        "scenario_id": 82,
+        "input": {
+            "ndvi": 0.14,
+            "objects": [
+                {
+                    "class": 2,
+                    "walk_time": 3.9
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.0
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 24.3
+                }
+            ]
+        },
+        "target": 0.23
+    },
+    {
+        "scenario_id": 83,
+        "input": {
+            "ndvi": 0.12,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 3.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 6.6
+                },
+                {
+                    "class": 0,
+                    "walk_time": 8.1
+                }
+            ]
+        },
+        "target": 0.18
+    },
+    {
+        "scenario_id": 84,
+        "input": {
+            "ndvi": 0.57,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 13.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 20.0
+                }
+            ]
+        },
+        "target": 0.58
+    },
+    {
+        "scenario_id": 85,
+        "input": {
+            "ndvi": 0.36,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 2.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 5.1
+                },
+                {
+                    "class": 3,
+                    "walk_time": 7.9
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.1
+                }
+            ]
+        },
+        "target": 0.47
+    },
+    {
+        "scenario_id": 86,
+        "input": {
+            "ndvi": 0.52,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 7.5
+                },
+                {
+                    "class": 4,
+                    "walk_time": 7.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 11.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 12.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 17.8
+                },
+                {
+                    "class": 3,
+                    "walk_time": 23.5
+                }
+            ]
+        },
+        "target": 0.67
+    },
+    {
+        "scenario_id": 87,
+        "input": {
+            "ndvi": 0.6,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 3.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 6.0
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 15.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 21.7
+                }
+            ]
+        },
+        "target": 0.78
+    },
+    {
+        "scenario_id": 88,
+        "input": {
+            "ndvi": 0.41,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 5.7
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 13.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 13.6
+                },
+                {
+                    "class": 1,
+                    "walk_time": 14.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 21.9
+                }
+            ]
+        },
+        "target": 0.44
+    },
+    {
+        "scenario_id": 89,
+        "input": {
+            "ndvi": 0.32,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 4.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 6.2
+                },
+                {
+                    "class": 4,
+                    "walk_time": 6.4
+                },
+                {
+                    "class": 2,
+                    "walk_time": 12.6
+                }
+            ]
+        },
+        "target": 0.24
+    },
+    {
+        "scenario_id": 90,
+        "input": {
+            "ndvi": 0.16,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 3.8
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.9
+                },
+                {
+                    "class": 3,
+                    "walk_time": 10.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 11.2
+                },
+                {
+                    "class": 0,
+                    "walk_time": 11.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 16.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 17.0
+                }
+            ]
+        },
+        "target": 0.38
+    },
+    {
+        "scenario_id": 21,
+        "input": {
+            "ndvi": 0.18,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 3,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 4,
+                    "walk_time": 11.9
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 12.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.9
+                },
+                {
+                    "class": 0,
+                    "walk_time": 19.0
+                }
+            ]
+        },
+        "target": 0.23
+    },
+    {
+        "scenario_id": 22,
+        "input": {
+            "ndvi": 0.38,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 3.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 6.2
+                },
+                {
+                    "class": 4,
+                    "walk_time": 6.5
+                },
+                {
+                    "class": 4,
+                    "walk_time": 8.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 12.0
+                }
+            ]
+        },
+        "target": 0.58
+    },
+    {
+        "scenario_id": 23,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 3.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 8.8
+                },
+                {
+                    "class": 3,
+                    "walk_time": 11.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 14.1
+                },
+                {
+                    "class": 1,
+                    "walk_time": 16.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 18.2
+                }
+            ]
+        },
+        "target": 0.32
+    },
+    {
+        "scenario_id": 24,
+        "input": {
+            "ndvi": 0.21,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 5.0
+                },
+                {
+                    "class": 4,
+                    "walk_time": 6.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 7.6
+                },
+                {
+                    "class": 0,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 11.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 22.2
+                }
+            ]
+        },
+        "target": 0.46
+    },
+    {
+        "scenario_id": 25,
+        "input": {
+            "ndvi": 0.5,
+            "objects": [
+                {
+                    "class": 3,
+                    "walk_time": 3.0
+                },
+                {
+                    "class": 4,
+                    "walk_time": 4.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 6.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 9.6
+                },
+                {
+                    "class": 2,
+                    "walk_time": 10.5
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.6
+                }
+            ]
+        },
+        "target": 0.47
+    },
+    {
+        "scenario_id": 26,
+        "input": {
+            "ndvi": 0.2,
+            "objects": [
+                {
+                    "class": 0,
+                    "walk_time": 4.0
+                },
+                {
+                    "class": 2,
+                    "walk_time": 7.1
+                },
+                {
+                    "class": 4,
+                    "walk_time": 9.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 10.3
+                },
+                {
+                    "class": 3,
+                    "walk_time": 13.2
+                },
+                {
+                    "class": 3,
+                    "walk_time": 17.4
+                }
+            ]
+        },
+        "target": 0.38
+    },
+    {
+        "scenario_id": 27,
+        "input": {
+            "ndvi": 0.36,
+            "objects": [
+                {
+                    "class": 1,
+                    "walk_time": 7.4
+                },
+                {
+                    "class": 1,
+                    "walk_time": 9.4
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 16.4
+                },
+                {
+                    "class": 3,
+                    "walk_time": 18.6
+                }
+            ]
+        },
+        "target": 0.56
+    },
+    {
+        "scenario_id": 28,
+        "input": {
+            "ndvi": 0.36,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 5.3
+                },
+                {
+                    "class": 2,
+                    "walk_time": 8.5
+                }
+            ]
+        },
+        "target": 0.3
+    },
+    {
+        "scenario_id": 29,
+        "input": {
+            "ndvi": 0.31,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 2.9
+                },
+                {
+                    "class": 4,
+                    "walk_time": 5.2
+                },
+                {
+                    "class": 1,
+                    "walk_time": 6.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 7.6
+                },
+                {
+                    "class": 1,
+                    "walk_time": 11.3
+                }
+            ]
+        },
+        "target": 0.34
+    },
+    {
+        "scenario_id": 30,
+        "input": {
+            "ndvi": 0.28,
+            "objects": [
+                {
+                    "class": 4,
+                    "walk_time": 4.7
+                },
+                {
+                    "class": 1,
+                    "walk_time": 5.7
+                },
+                {
+                    "class": 3,
+                    "walk_time": 7.5
+                },
+                {
+                    "class": 3,
+                    "walk_time": 11.8
+                },
+                {
+                    "class": 1,
+                    "walk_time": 12.1
+                },
+                {
+                    "class": 0,
+                    "walk_time": 14.5
+                },
+                {
+                    "class": 2,
+                    "walk_time": 14.9
+                },
+                {
+                    "class": 2,
+                    "walk_time": 18.3
+                },
+                {
+                    "class": 0,
+                    "walk_time": 20.7
+                }
+            ]
+        },
+        "target": 0.33
+    }
+]

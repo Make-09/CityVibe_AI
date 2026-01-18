@@ -1,0 +1,9 @@
+# Системные и кэш файлы
+__pycache__/
+.venv/
+.vscode/
+api_keys.env
+
+# Временные файлы
+cityvibe_context.txt
+abc.py

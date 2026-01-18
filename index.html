@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CityVibe AI - Уральск</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root { --google-blue: #1a73e8; --text-dark: #202124; }
+        body { margin: 0; padding: 0; font-family: 'Roboto', Arial, sans-serif; display: flex; height: 100vh; overflow: hidden; }
+        
+        #map { flex-grow: 1; height: 100%; position: relative; z-index: 1; }
+
+        #search-box {
+            position: absolute; top: 12px; left: 12px; z-index: 9999;
+            width: 392px; background: white; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+
+        .search-container { display: flex; align-items: center; padding: 0 16px; height: 48px; }
+        .menu-icon { color: #70757a; margin-right: 16px; cursor: pointer; font-size: 20px; }
+        
+        #search-input {
+            flex: 1; border: none; outline: none; font-size: 16px;
+            color: var(--text-dark); background: transparent;
+        }
+
+        #search-results {
+            background: white; border-top: 1px solid #e8eaed;
+            max-height: 400px; overflow-y: auto; display: none;
+        }
+
+        .result-item {
+            padding: 12px 16px; cursor: pointer; display: flex; align-items: center;
+            border-bottom: 1px solid #f1f3f4; font-size: 14px; color: #3c4043;
+        }
+        .result-item:hover { background: #f8f9fa; }
+
+        #sidebar { 
+            position: absolute; top: 72px; left: 12px; z-index: 9998;
+            width: 392px; background: white; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            max-height: calc(100vh - 100px); overflow-y: auto;
+            display: none; padding: 0; color: var(--text-dark);
+        }
+
+        .sidebar-header { 
+            background: #f8f9fa; padding: 20px; border-bottom: 1px solid #e8eaed;
+            position: relative;
+        }
+        
+        .close-sidebar {
+            position: absolute; top: 16px; right: 16px;
+            background: transparent; border: none; font-size: 24px;
+            color: #70757a; cursor: pointer; padding: 4px 8px;
+            border-radius: 4px; line-height: 1;
+        }
+        .close-sidebar:hover { background: #e8eaed; }
+        .score-circle { 
+            width: 60px; height: 60px; background: var(--google-blue); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: bold; margin-bottom: 10px;
+        }
+
+        .content-padding { padding: 20px; }
+        h3 { margin: 0 0 8px 0; font-size: 22px; font-weight: 400; }
+        .label { color: #70757a; font-size: 13px; margin-bottom: 15px; display: block; }
+
+        .infra-card { 
+            display: flex; align-items: center; padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4; font-size: 14px;
+        }
+        .infra-time { margin-left: auto; color: #188038; font-weight: 500; }
+        
+        .category-group { margin-bottom: 12px; }
+        .category-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; cursor: pointer; user-select: none;
+            border-bottom: 1px solid #e8eaed; font-weight: 500;
+        }
+        .category-header:hover { background: #f8f9fa; margin: 0 -20px; padding: 12px 20px; }
+        .category-title { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+        .category-count { 
+            background: #e8eaed; color: #5f6368; padding: 2px 8px; 
+            border-radius: 12px; font-size: 12px; font-weight: 500;
+        }
+        .category-arrow { 
+            font-size: 18px; transition: transform 0.2s; color: #70757a;
+        }
+        .category-arrow.open { transform: rotate(90deg); }
+        .category-items { 
+            display: none; padding-left: 8px; 
+        }
+        .category-items.open { display: block; }
+        .category-items .infra-card { padding: 10px 0 10px 28px; }
+        
+        .location-btn {
+            background: transparent; border: none; color: var(--google-blue);
+            cursor: pointer; padding: 4px 8px; font-size: 18px;
+            margin-left: 8px; border-radius: 4px;
+        }
+        .location-btn:hover { background: #e8f0fe; }
+        
+        .details-btn {
+            background: #e8f0fe; border: none; color: var(--google-blue);
+            cursor: pointer; padding: 6px 12px; font-size: 12px;
+            border-radius: 4px; margin-left: 8px; font-weight: 500;
+        }
+        .details-btn:hover { background: #d2e3fc; }
+        
+        /* Модальное окно с деталями объекта */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 10000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+        
+        .modal-content {
+            background: white; border-radius: 12px; width: 90%;
+            max-width: 600px; max-height: 80vh; overflow-y: auto;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            padding: 20px; border-bottom: 1px solid #e8eaed;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h2 { margin: 0; font-size: 20px; font-weight: 500; }
+        
+        .modal-body { padding: 0; }
+        
+        .place-photo {
+            width: 100%; height: 250px; object-fit: cover;
+            background: #f1f3f4; display: block;
+        }
+        
+        .place-info { padding: 20px; }
+        .place-rating {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 12px; font-size: 14px;
+        }
+        .stars { color: #fbbc04; }
+        
+        .place-hours {
+            background: #f8f9fa; padding: 12px; border-radius: 8px;
+            margin: 12px 0; font-size: 14px;
+        }
+        .place-hours-title { font-weight: 500; margin-bottom: 8px; }
+        
+        .place-reviews {
+            margin-top: 16px; border-top: 1px solid #e8eaed; padding-top: 16px;
+        }
+        .review-item {
+            padding: 12px 0; border-bottom: 1px solid #f1f3f4;
+        }
+        .review-author {
+            font-weight: 500; font-size: 14px; margin-bottom: 4px;
+        }
+        .review-text {
+            font-size: 13px; color: #5f6368; line-height: 1.5;
+        }
+        
+        .score-marker {
+            background: var(--google-blue); color: white;
+            padding: 8px 12px; border-radius: 20px;
+            font-weight: bold; font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .loading-overlay { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: #323232; color: white; padding: 12px 24px;
+            border-radius: 4px; z-index: 10000; display: none; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loading" class="loading-overlay">CityVibe AI analyzing...</div>
+
+<div id="search-box">
+    <div class="search-container">
+        <span class="menu-icon">☰</span>
+        <input type="text" id="search-input" placeholder="Поиск в CityVibe Уральск">
+    </div>
+    <div id="search-results"></div>
+</div>
+
+<div id="map"></div>
+
+<div id="sidebar">
+    <div class="sidebar-header">
+        <button class="close-sidebar" onclick="closeSidebar()">×</button>
+        <div class="score-circle" id="score-box">--</div>
+        <h3 id="addr-title">Объект</h3>
+        <span class="label">Оценка качества городской среды</span>
+    </div>
+    <div class="content-padding">
+        <p id="verdict-text" style="font-style: italic; color: #5f6368;"></p>
+        <div style="margin-top: 20px;">
+            <b>Озеленение (NDVI):</b> <span id="ndvi-val">--</span>
+        </div>
+        <h4 style="margin-top: 25px; font-size: 14px; text-transform: uppercase; color: #70757a;">Инфраструктура поблизости</h4>
+        <div id="infra-container"></div>
+    </div>
+</div>
+
+<!-- Модальное окно с деталями объекта -->
+<div class="modal-overlay" id="placeModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title">Загрузка...</h2>
+            <button class="close-sidebar" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <img id="modal-photo" class="place-photo" src="" alt="" style="display:none;">
+            <div class="place-info">
+                <div class="place-rating" id="modal-rating"></div>
+                <div id="modal-address"></div>
+                <div class="place-hours" id="modal-hours" style="display:none;">
+                    <div class="place-hours-title">⏰ Часы работы</div>
+                    <div id="modal-hours-list"></div>
+                </div>
+                <div class="place-reviews" id="modal-reviews" style="display:none;">
+                    <h4 style="margin: 0 0 12px 0;">💬 Отзывы</h4>
+                    <div id="modal-reviews-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://tyrasd.github.io/osmtogeojson/osmtogeojson.js"></script>
+
+<script>
+    // Настройка спутниковой карты Google БЕЗ меток POI
+    const map = L.map('map', { zoomControl: false }).setView([51.247, 51.415], 16);
+    
+    // Используем чистый спутниковый слой без меток (lyrs=s)
+    const googleSatellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+    }).addTo(map);
+
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // Кэш для результатов аудита
+    const auditCache = new Map();
+    
+    // Маркер с баллом на выбранном здании
+    let scoreMarker = null;
+
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    // Логика поиска
+    async function performSearch(query) {
+        if (query.length < 3) return;
+        const fullQuery = "Уральск, " + query;
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullQuery)}&limit=5&accept-language=ru`;
+
+        try {
+            const response = await fetch(url);
+            
+            // Проверяем статус
+            if (!response.ok) {
+                console.warn('Nominatim API недоступен');
+                return;
+            }
+            
+            const data = await response.json();
+            searchResults.innerHTML = '';
+            if (data.length > 0) {
+                searchResults.style.display = 'block';
+                data.forEach(res => {
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.innerHTML = `📍 ${res.display_name.split(',').slice(0,2).join(',')}`;
+                    div.onclick = () => {
+                        const lat = parseFloat(res.lat);
+                        const lon = parseFloat(res.lon);
+                        map.setView([lat, lon], 18);
+                        searchResults.style.display = 'none';
+                        searchInput.value = res.display_name.split(',')[0];
+                        runAudit(lat, lon, { "addr:street": searchInput.value }, { lat, lon });
+                    };
+                    searchResults.appendChild(div);
+                });
+            }
+        } catch (e) { 
+            console.warn('Ошибка поиска:', e.message); 
+        }
+    }
+
+    searchInput.addEventListener('input', () => {
+        clearTimeout(window.searchTimer);
+        window.searchTimer = setTimeout(() => performSearch(searchInput.value), 500);
+    });
+
+    // Отрисовка зданий
+    let buildingsLayer = L.geoJSON(null, {
+        style: { color: '#ffffff', weight: 1.5, fillOpacity: 0.1 },
+        onEachFeature: (f, l) => {
+            l.on('click', (e) => { 
+                L.DomEvent.stopPropagation(e);
+                const lat = e.latlng.lat;
+                const lon = e.latlng.lng;
+                runAudit(lat, lon, f.properties, e.latlng); 
+            });
+        }
+    }).addTo(map);
+
+    async function loadBuildings() {
+        if (map.getZoom() < 16) return;
+        const b = map.getBounds();
+        const q = `[out:json];(way["building"](${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}););out body;>;out skel qt;`;
+        try {
+            const res = await fetch("https://overpass-api.de/api/interpreter", { method: "POST", body: q });
+            
+            // Проверяем, что ответ действительно JSON
+            const contentType = res.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                console.warn('Overpass API вернул не JSON, пропускаем загрузку зданий');
+                return;
+            }
+            
+            const data = await res.json();
+            if (data && data.elements) {
+                buildingsLayer.clearLayers().addData(osmtogeojson(data));
+            }
+        } catch (e) { 
+            console.warn('Ошибка загрузки зданий (Overpass API перегружен):', e.message); 
+        }
+    }
+
+    map.on('moveend', loadBuildings);
+    
+    // Ограничиваем частоту запросов к Overpass API
+    let loadBuildingsTimeout;
+    map.on('moveend', () => {
+        clearTimeout(loadBuildingsTimeout);
+        loadBuildingsTimeout = setTimeout(loadBuildings, 1000); // Задержка 1 секунда
+    });
+
+    // Функция переключения категорий
+    window.toggleCategory = function(categoryId) {
+        const items = document.getElementById(categoryId);
+        const arrow = document.getElementById('arrow-' + categoryId);
+        
+        if (items && arrow) {
+            items.classList.toggle('open');
+            arrow.classList.toggle('open');
+        }
+    };
+    
+    // Функция показа объекта на карте
+    window.showOnMap = function(lat, lon) {
+        map.setView([lat, lon], 19, { animate: true, duration: 0.5 });
+        
+        // Создаем временный маркер на объекте
+        const tempMarker = L.marker([lat, lon], {
+            icon: L.divIcon({
+                className: 'temp-marker',
+                html: '<div style="background: #ea4335; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"></div>',
+                iconSize: [20, 20]
+            })
+        }).addTo(map);
+        
+        // Убираем маркер через 3 секунды
+        setTimeout(() => map.removeLayer(tempMarker), 3000);
+    };
+    
+    // Функция закрытия сайдбара
+    window.closeSidebar = function() {
+        document.getElementById('sidebar').style.display = 'none';
+    };
+    
+    // Функция закрытия модального окна
+    window.closeModal = function() {
+        document.getElementById('placeModal').classList.remove('show');
+    };
+    
+    // Закрытие по клику вне модального окна
+    document.getElementById('placeModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+    
+    // Функция показа деталей объекта
+    window.showPlaceDetails = async function(name, lat, lon) {
+        const modal = document.getElementById('placeModal');
+        modal.classList.add('show');
+        
+        // Сброс содержимого
+        document.getElementById('modal-title').innerText = name;
+        document.getElementById('modal-photo').style.display = 'none';
+        document.getElementById('modal-rating').innerHTML = '';
+        document.getElementById('modal-address').innerHTML = '';
+        document.getElementById('modal-hours').style.display = 'none';
+        document.getElementById('modal-reviews').style.display = 'none';
+        
+        try {
+            // Запрос к бэкенду для получения данных из Google Places
+            const res = await fetch(`http://127.0.0.1:8000/place-details?name=${encodeURIComponent(name)}&lat=${lat}&lon=${lon}`);
+            const data = await res.json();
+            
+            if (data.status === 'success' && data.place) {
+                const place = data.place;
+                
+                // Фото
+                if (place.photo_url) {
+                    const photoEl = document.getElementById('modal-photo');
+                    photoEl.src = place.photo_url;
+                    photoEl.style.display = 'block';
+                }
+                
+                // Рейтинг
+                if (place.rating) {
+                    const stars = '⭐'.repeat(Math.round(place.rating));
+                    document.getElementById('modal-rating').innerHTML = `
+                        <span class="stars">${stars}</span>
+                        <span>${place.rating} (${place.user_ratings_total || 0} отзывов)</span>
+                    `;
+                }
+                
+                // Адрес
+                if (place.address) {
+                    document.getElementById('modal-address').innerHTML = `📍 ${place.address}`;
+                }
+                
+                // Часы работы
+                if (place.opening_hours && place.opening_hours.length > 0) {
+                    document.getElementById('modal-hours').style.display = 'block';
+                    document.getElementById('modal-hours-list').innerHTML = 
+                        place.opening_hours.map(h => `<div style="padding: 4px 0;">${h}</div>`).join('');
+                }
+                
+                // Отзывы
+                if (place.reviews && place.reviews.length > 0) {
+                    document.getElementById('modal-reviews').style.display = 'block';
+                    document.getElementById('modal-reviews-list').innerHTML = 
+                        place.reviews.map(r => `
+                            <div class="review-item">
+                                <div class="review-author">
+                                    <span class="stars">${'⭐'.repeat(r.rating)}</span>
+                                    ${r.author_name}
+                                </div>
+                                <div class="review-text">${r.text}</div>
+                            </div>
+                        `).join('');
+                }
+            } else {
+                document.getElementById('modal-rating').innerHTML = 
+                    '<p style="color: #70757a;">Информация об объекте недоступна</p>';
+            }
+        } catch (e) {
+            console.error('Ошибка загрузки деталей:', e);
+            document.getElementById('modal-rating').innerHTML = 
+                '<p style="color: #d93025;">Ошибка загрузки данных</p>';
+        }
+    };
+
+    // Функция определения иконки по классу объекта
+    function getIconByClass(classId) {
+        const icons = {
+            0: '🛒',  // Магазин
+            1: '💊',  // Аптека
+            2: '☕',  // Кафе
+            3: '🏥',  // Клиника
+            4: '🚌'   // Остановка
+        };
+        return icons[classId] || '📍';
+    }
+
+    async function runAudit(lat, lon, props, latlng) {
+        // Создаем уникальный ключ для кэша
+        const cacheKey = `${lat.toFixed(6)}_${lon.toFixed(6)}`;
+        
+        // Проверяем кэш
+        if (auditCache.has(cacheKey)) {
+            console.log('📦 Загружаем из кэша');
+            displayAuditResults(auditCache.get(cacheKey), props, latlng);
+            return;
+        }
+        
+        document.getElementById('loading').style.display = 'block';
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/audit?lat=${lat}&lon=${lon}`);
+            
+            // Проверяем статус ответа
+            if (!res.ok) {
+                throw new Error(`Сервер вернул статус ${res.status}`);
+            }
+            
+            // Проверяем Content-Type
+            const contentType = res.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                throw new Error('Сервер вернул не JSON. Проверь, что server.py запущен.');
+            }
+            
+            const data = await res.json();
+            
+            if (data.status === "success") {
+                // Сохраняем в кэш
+                auditCache.set(cacheKey, data);
+                displayAuditResults(data, props, latlng);
+            } else {
+                alert('Ошибка аудита: ' + (data.message || 'Неизвестная ошибка'));
+            }
+        } catch (e) { 
+            console.error('Ошибка при выполнении аудита:', e);
+            alert("❌ Ошибка подключения к серверу CityVibe\n\n" + 
+                  "Убедись что:\n" +
+                  "1. Запущен server.py (python server.py)\n" +
+                  "2. Сервер работает на http://127.0.0.1:8000\n\n" +
+                  "Детали: " + e.message); 
+        } finally { 
+            document.getElementById('loading').style.display = 'none'; 
+        }
+    }
+    
+    function displayAuditResults(data, props, latlng) {
+        document.getElementById('sidebar').style.display = 'block';
+        
+        // Добавляем маркер с баллом на здание
+        if (scoreMarker) {
+            map.removeLayer(scoreMarker);
+        }
+        
+        if (latlng) {
+            const scoreColor = data.score > 70 ? '#188038' : (data.score > 40 ? '#1a73e8' : '#d93025');
+            scoreMarker = L.marker([latlng.lat, latlng.lng], {
+                icon: L.divIcon({
+                    className: 'score-marker-container',
+                    html: `<div class="score-marker" style="background: ${scoreColor}">${data.score}</div>`,
+                    iconSize: [50, 30],
+                    iconAnchor: [25, 15]
+                })
+            }).addTo(map);
+            
+            // При клике на маркер - показываем сайдбар снова
+            scoreMarker.on('click', () => {
+                document.getElementById('sidebar').style.display = 'block';
+            });
+        }
+        
+        // Обновляем балл
+        const scoreBox = document.getElementById('score-box');
+        scoreBox.innerText = data.score;
+        scoreBox.style.background = data.score > 70 ? '#188038' : (data.score > 40 ? '#1a73e8' : '#d93025');
+        
+        document.getElementById('addr-title').innerText = props["addr:street"] || props["name"] || "Выбранная локация";
+        document.getElementById('ndvi-val').innerText = data.ndvi_percent + "%";
+        
+        // Вердикт
+        let verdict = "В этом районе не хватает сервисов.";
+        if (data.score > 75) verdict = "Отличная городская среда!";
+        else if (data.score > 50) verdict = "Хороший район, всё необходимое рядом.";
+        document.getElementById('verdict-text').innerText = verdict;
+        
+        // Отрисовка инфраструктуры
+        const container = document.getElementById('infra-container');
+        container.innerHTML = "";
+        
+        if (data.infrastructure && data.infrastructure.length > 0) {
+            // Группируем объекты по типам
+            const grouped = {};
+            data.infrastructure.forEach(obj => {
+                const type = obj.type || 'Другое';
+                if (!grouped[type]) {
+                    grouped[type] = [];
+                }
+                grouped[type].push(obj);
+            });
+            
+            // Иконки для категорий
+            const categoryIcons = {
+                'Магазин': '🛒',
+                'Аптека': '💊',
+                'Кафе': '☕',
+                'Клиника': '🏥',
+                'Остановка': '🚌'
+            };
+            
+            // Отрисовываем группы
+            Object.keys(grouped).forEach(type => {
+                const items = grouped[type];
+                const icon = categoryIcons[type] || '📍';
+                const categoryId = 'cat-' + type.toLowerCase().replace(/\s/g, '-');
+                
+                container.innerHTML += `
+                    <div class="category-group">
+                        <div class="category-header" onclick="toggleCategory('${categoryId}')">
+                            <div class="category-title">
+                                <span class="category-arrow" id="arrow-${categoryId}">▶</span>
+                                <span>${icon} ${type}ы</span>
+                                <span class="category-count">${items.length}</span>
+                            </div>
+                        </div>
+                        <div class="category-items" id="${categoryId}">
+                            ${items.map(obj => {
+                                const name = obj.name.replace(type, '').replace(/^\s*\(|\)\s*$/g, '').trim() || type;
+                                // Используем реальные координаты из базы данных
+                                const objLat = obj.lat || data.coords[0];
+                                const objLon = obj.lon || data.coords[1];
+                                return `
+                                    <div class="infra-card">
+                                        <span>${name}</span>
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span class="infra-time">${obj.walk_time} мин</span>
+                                            <button class="location-btn" onclick="showOnMap(${objLat}, ${objLon})" title="Показать на карте">📍</button>
+                                            <button class="details-btn" onclick="showPlaceDetails('${name.replace(/'/g, "\\'")}', ${objLat}, ${objLon})">Подробнее</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            container.innerHTML = "<p style='color: #70757a; font-size: 13px;'>Объекты не найдены в радиусе 15 мин.</p>";
+        }
+    }
+
+    // Загружаем здания при инициализации
+    loadBuildings();
+    
+    // Проверяем доступность сервера при загрузке
+    async function checkServerStatus() {
+        try {
+            const res = await fetch('http://127.0.0.1:8000/', { method: 'GET' });
+            if (res.ok) {
+                console.log('✅ Сервер CityVibe AI подключен');
+            } else {
+                console.warn('⚠️ Сервер отвечает, но есть проблемы');
+            }
+        } catch (e) {
+            console.error('❌ Сервер CityVibe не запущен. Запусти: python server.py');
+        }
+    }
+    
+    checkServerStatus();
+</script>
+</body>
+</html>
