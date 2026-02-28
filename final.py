@@ -1,6 +1,6 @@
 from NDVI import get_ndvi_multi_radius
 from infrastructure import get_cityvibe_input_data
-from predict import predict_score
+from predict import predict_score, CityVibeNet
 
 # Маппинг ID классов в читаемые названия
 CLASS_NAMES = {
@@ -11,11 +11,21 @@ CLASS_NAMES = {
     4: "Остановка"
 }
 
-def evaluate_my_home(lat: float, lon: float):
+def evaluate_my_home(lat: float, lon: float, model=None):
     """
     Главная функция аудита локации.
     Возвращает: (score, ndvi, infrastructure_list)
     """
+    # Инициализируем модель если не передана
+    if model is None:
+        import torch
+        import os
+        device = torch.device("cpu")
+        model = CityVibeNet()
+        MODEL_PATH = os.path.join("models", "cityvibe_model.pth")
+        if os.path.exists(MODEL_PATH):
+            model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+            model.eval()
     # 1. Получаем NDVI для разных радиусов
     ndvi_analysis = get_ndvi_multi_radius(lat, lon, radii=[100, 200, 300])
     
@@ -33,7 +43,7 @@ def evaluate_my_home(lat: float, lon: float):
     ]
     
     # 4. Получаем предсказание от нейросети (0-100 баллов)
-    score = predict_score(ndvi_value, objects_for_nn)
+    score = predict_score(model, ndvi_value, objects_for_nn)
     
     # 5. Формируем список объектов для фронтенда
     formatted_infra = []

@@ -37,24 +37,24 @@ def parse_text_scenarios(text):
 def build_final_dataset(csv_path, raw_text):
     scenarios_library = parse_text_scenarios(raw_text)
     
-    # Загружаем CSV
+    # загрузка CSV с оценками
     df = pd.read_csv(csv_path)
     final_dataset = []
 
-    # Проходим по строкам
+    # проход по строкам и извлечение оценок
     for _, row in df.iterrows():
-        # Начинаем с 2-го индекса (пропускаем Время и Выбор группы)
+        # пропускаем первые два столбца (служебные поля формы)
         for col_idx in range(2, len(row)):
             raw_score = row.iloc[col_idx]
             
-            # Проверяем, что в ячейке есть данные
+            # пропускаем пустые ячейки
             if pd.notna(raw_score) and str(raw_score).strip() != "":
                 try:
-                    # Очищаем значение от лишних символов и превращаем в число
+                    # нормализация значения и приведение к float
                     clean_score = float(str(raw_score).replace(',', '.').strip())
                     
-                    # Определяем номер сценария по названию колонки
-                    col_name = df.columns[col_idx] # Например "Сценарий №31"
+                    # номер сценария берется из имени колонки
+                    col_name = df.columns[col_idx]
                     scenario_num = int(re.search(r'№(\d+)', col_name).group(1))
                     
                     if scenario_num in scenarios_library:
@@ -64,15 +64,15 @@ def build_final_dataset(csv_path, raw_text):
                             "target": clean_score / 100.0
                         })
                 except Exception as e:
-                    continue # Если в ячейке текст, просто идем дальше
+                    continue
 
     with open("cityvibe_dataset.json", "w", encoding="utf-8") as f:
         json.dump(final_dataset, f, ensure_ascii=False, indent=4)
     
-    print(f"✅ Успех! Найдено заполненных оценок: {len(final_dataset)}")
-    print(f"Файл 'cityvibe_dataset.json' готов.")
+    print(f"Обработано оценок: {len(final_dataset)}")
+    print("Выходной файл: cityvibe_dataset.json")
 
-# Вставь сюда свои 100 сценариев (я сократил для примера)
+# текстовые сценарии (используются для формирования входов)
 RAW_SCENARIOS = """
 Сценарий №1
 Зелень (NDVI): 48%
@@ -478,5 +478,5 @@ RAW_SCENARIOS = """
 """
 
 if __name__ == "__main__":
-    # Убедись, что файл называется именно answers.csv или поменяй имя тут
+    # путь к CSV с ответами формы
     build_final_dataset('CityVibe_AI - Ответы на форму (1) (1).csv', RAW_SCENARIOS)

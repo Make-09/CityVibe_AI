@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import logging
 from dotenv import load_dotenv
 from sentinelhub import (
     SHConfig, SentinelHubRequest, DataCollection, BBox, 
@@ -7,6 +8,9 @@ from sentinelhub import (
 )
 
 load_dotenv("api_keys.env")
+
+# Настройка логирования
+logger = logging.getLogger(__name__)
 
 config = SHConfig()
 config.sh_client_id = os.getenv("SH_CLIENT_ID")
@@ -47,15 +51,26 @@ def get_ndvi_multi_radius(lat: float, lon: float, radii=[100, 200, 300]):
             config=config
         )
 
-        data = request.get_data()[0].flatten()
-        data = data[~np.isnan(data)]
-        
-        if data.size > 0:
-            data_sorted = np.sort(data)
-            top_30_idx = int(len(data_sorted) * 0.7)
-            val = np.mean(data_sorted[top_30_idx:])
-            results[radius] = float(val)
-        else:
+        try:
+            data_list = request.get_data()
+            if not data_list or len(data_list) == 0:
+                logger.warning(f"Empty response from SentinelHub for radius {radius}m")
+                results[radius] = 0.0
+                continue
+                
+            data = data_list[0].flatten()
+            data = data[~np.isnan(data)]
+            
+            if data.size > 0:
+                data_sorted = np.sort(data)
+                top_30_idx = int(len(data_sorted) * 0.3)  # Берем лучшие 30% значений
+                val = np.mean(data_sorted[:top_30_idx])
+                results[radius] = float(val)
+            else:
+                results[radius] = 0.0
+                
+        except Exception as e:
+            logger.error(f"Error processing NDVI for radius {radius}m: {e}")
             results[radius] = 0.0
             
     return results

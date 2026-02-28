@@ -1,31 +1,31 @@
 # main.py
 from NDVI import get_ndvi_multi_radius
-from infrastructure import get_cityvibe_input_data, CATEGORIES
+from infrastructure import get_cityvibe_input_data, CATEGORIES_MAP
 
-# создаем mapping категорий в int для deep sets
-CLASS_TO_INT = {cls: i for i, cls in enumerate(CATEGORIES.keys())}
+# соответствие названий категорий их индексам (для входа в модель)
+CLASS_TO_INT = {cls: i for i, cls in enumerate(CATEGORIES_MAP.keys())}
 
 def get_cityvibe_for_nn(lat, lon):
-    # 1️⃣ Получаем NDVI
+    # NDVI
     ndvi_results = get_ndvi_multi_radius(lat, lon)
-    ndvi_value = ndvi_results[200]  # берем радиус 200 м как основной
+    ndvi_value = ndvi_results[200]  # основной радиус — 200 м
 
-    # 2️⃣ Получаем инфраструктуру
+    # инфраструктура (с учетом NDVI)
     dataset = get_cityvibe_input_data(lat, lon, ndvi_value)
 
-    # 3️⃣ Преобразуем инфраструктуру в формат для NN
+    # преобразование инфраструктуры в формат входа модели
     objects = []
     for item in dataset['infrastructure']:
         for cls_str, walk_time in item.items():
             cls_int = CLASS_TO_INT.get(cls_str, -1)
-            if cls_int == -1:  # на всякий случай
+            if cls_int == -1:  # неизвестная категория
                 continue
             objects.append({
                 "class": cls_int,
                 "walk_time": walk_time
             })
 
-    # 4️⃣ Итоговый объект для нейросети
+    # итоговый словарь для модели
     return {
         "ndvi": ndvi_value,
         "objects": objects
